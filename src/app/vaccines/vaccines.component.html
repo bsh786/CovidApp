@@ -1,0 +1,68 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+
+
+<br><br>
+<div *ngIf="!dataLoaded">
+  <div class="text-center" style="z-index: 1;">
+    <br><br><br><br><br><br>
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+    <button type="button" class="btn btn-outline-info"
+    *ngFor="let phase of phaseData;let i=index;"
+    (click)="selectPhase(i)"> {{ phase.phase }}</button>
+    
+  </div>
+  </div>
+  </div>
+  <br><br>
+ <div *ngIf="phaseSelected"> 
+ <div class="row">  
+<div class="col-3">
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Vaccines in {{selectedPhase}}</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vaccine of vaccinesInSelectedPhase;
+      let j= index" (click)="selectVaccine(j);">
+        <td 
+        style="cursor: pointer;">{{ vaccine.sponsors }}</td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+  <div class="col-7" style="position: relative; left: 50px;">
+  <div *ngIf="vaccineSelected">
+    <table class="table">
+      
+      <tbody>
+        <tr *ngFor="let key of objectKeys(selectedVaccine)">
+          <th scope="row"> {{ key }}</th>
+          <td> {{ selectedVaccine[key] }}</td>
+         
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div *ngIf="!phaseSelected">
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+  </div>
+
+

@@ -1,0 +1,254 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+<br><br>
+
+
+<div class="d-flex justify-content-center" 
+*ngIf="!dataReceived || !lineChartDataReady"
+style="position: relative; top: 100px;">
+
+
+
+  <div class="spinner-border" role="status">
+   
+  </div>
+  <br><br><br><br><br><br><br><br>
+  <br><br><br><br>  
+</div>
+
+
+
+
+
+<div class="container" *ngIf="dataReceived && lineChartDataReady">
+    <div class="row align-items-start" style="text-align: center;">
+        <div class="col">
+          <h6>TOTAL CASES</h6>
+            <h3 style="font-family: 'Mulish', sans-serif;">
+               {{ totalCases }}
+               </h3>
+        </div>
+        <div class="col">
+          <h6>TOTAL RECOVERED</h6>
+            <h3 style="font-family: 'Mulish', sans-serif;">
+                {{ totalRecovered }}
+             </h3>
+
+        </div>
+        <div class="col">
+          <h6>TOTAL DEATHS</h6>
+            <h3 style="font-family: 'Mulish', sans-serif;">
+                {{ totalDeaths }} </h3>
+        </div>
+
+    </div>
+  <br><br>
+
+ 
+
+    <div class="d-flex justify-content-center">
+        <div style="height: 50%; width: 50%;" *ngIf="dataReceived">
+            <div class="chart-wrapper">
+                <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend"></canvas>
+            </div>
+          </div>
+    </div>
+    <br><br>
+    <br><br>
+    
+
+
+    <div class="row align-items-start" style="text-align: center;">
+      <div class="col hoverCases" (click)="onClickNewCases();"
+      [ngClass]="{'newCases': lineGraphSelected === 1}"
+      style="cursor: pointer;">
+        <h6>CASES TODAY</h6>
+          <h3 style="font-family: 'Mulish', sans-serif;">
+             {{ newCases }}
+             </h3>
+      </div>
+      <div class="col hoverRecovered" (click)="onClickNewRecoveries();"
+      [ngClass]="{'newRecovered': lineGraphSelected === 2}"
+      style="cursor: pointer;">
+        <h6>RECOVERED TODAY</h6>
+          <h3 style="font-family: 'Mulish', sans-serif;">
+              {{ newRecovered }}
+           </h3>
+
+      </div>
+      <div class="col hoverDeaths" (click)="onClickNewDeaths();"
+      [ngClass]="{'newDeaths': lineGraphSelected === 3}"
+      style="cursor: pointer;">
+        <h6>DEATHS TODAY</h6>
+          <h3 style="font-family: 'Mulish', sans-serif;">
+              {{ newDeaths }} </h3>
+      </div>
+
+  </div>
+<br><br>
+<div class="d-flex justify-content-center">
+  <div style="height: 80%; width: 80%;" 
+  *ngIf="lineChartDataReady && lineGraphSelected === 1">
+    <div class="chart-wrapper">
+      <canvas baseChart
+      [datasets]="newCasesLineChartData"
+      [labels]="newCasesLineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="newCasesLineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins"></canvas>
+  </div>
+  </div>
+  
+  <div style="height: 80%; width: 80%;" 
+  *ngIf="lineChartDataReady && lineGraphSelected === 2">
+    <div class="chart-wrapper">
+      <canvas baseChart
+      [datasets]="todayRecoveredLineChartData"
+      [labels]="todayRecoveredLineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="recoveredLineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins"></canvas>
+  </div>
+  </div>
+
+  <div style="height: 80%; width: 80%;" 
+  *ngIf="lineChartDataReady && lineGraphSelected === 3">
+    <div class="chart-wrapper">
+      <canvas baseChart
+      [datasets]="todayDeathsLineChartData"
+      [labels]="todayDeathsLineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="deathLineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins"></canvas>
+  </div>
+
+  </div>
+</div>
+
+
+<br><br><br><br><br><br>
+   
+    <div class="d-flex justify-content-center">
+      
+    <div class="row align-items-start">
+        <div class="col">
+            <div class="card" style="width: 18rem; ">
+             
+                <img src="https://miro.medium.com/max/720/0*UjBJ_iTNESi6Zevk.jpg" class="card-img-top" alt="..."
+                height="180rem">
+                <div class="card-body">
+                  
+                  <button type="button" class="btn btn-outline-info btn-lg
+                  " style="position: relative; left: 20%; font-family: 'Mulish', sans-serif"
+                  (click)="onClickStatistics();">
+                  <i class="fas fa-chart-line"></i> Statistics
+                  </button>
+                
+              
+                </div>
+                
+              </div>
+           
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="https://webassets.tomtom.com/otf/images/media/D3DF1550-E154-4EEC-AB5455C142A405A0"
+                height="180rem"
+                 class="card-img-top" alt="...">
+                <div class="card-body">
+                  <button type="button" class="btn btn-outline-info btn-lg
+                  " style="position: relative; left: 5%; font-family: 'Mulish', sans-serif"
+                  (click)="onClickStatewise();">
+                  <i class="fas fa-flag"></i> Statewise Details
+                </button>
+                 
+                </div>
+              </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem; ">
+                <img src="https://www.countryreports.org/uGraphics/tempImages/selectBack.jpg"
+                 height="180rem" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <button type="button" class="btn btn-outline-info btn-lg
+                  " style="position: relative; left: 12%; font-family: 'Mulish', sans-serif"
+                  (click)="onClickWorldometer();">
+                  <i class="fas fa-globe-americas"></i> Worldometer</button>
+                  
+                </div>
+              </div>
+        </div>
+    </div>  
+    </div>
+    
+
+<br>
+<div class="d-flex justify-content-center">
+<div class="row align-items-start">
+  <div class="col">
+
+    <div class="card" style="width: 18rem; ">
+      <img src="https://www.exchange4media.com/news-photo/100489.mygovlogo.jpg"
+       height="180rem" class="card-img-top" alt="...">
+      <div class="card-body">
+        <button type="button" class="btn btn-outline-info btn-lg
+        " style="position: relative;left: 8%;  font-family: 'Mulish', sans-serif"
+        (click)="onClickHelpline();">
+        <i class="fas fa-ambulance"></i> Covid Helplines</button>
+        
+      </div>
+    </div>
+  </div>
+  <div class="col">
+
+    <div class="card" style="width: 18rem; ">
+      <img src="https://www.jhsph.edu/sebin/z/z/SARS-CoV-2-vaccine-820x440.jpg"
+       height="180rem" class="card-img-top" alt="...">
+      <div class="card-body">
+        <button type="button" class="btn btn-outline-info btn-lg
+        " style="position: relative;left: 20%;  font-family: 'Mulish', sans-serif"
+        (click)="onClickVaccines();">
+        <i class="fas fa-syringe"></i> Vaccines</button>
+        
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+ 
+    <div class="card" style="width: 18rem; ">
+      <img src="https://content.techgig.com/thumb/msid-77786852,width-860,resizemode-4/Top-7-most-used-databases-by-developers-in-2020.jpg?182293"
+       height="180rem" class="card-img-top" alt="...">
+      <div class="card-body">
+        <button type="button" class="btn btn-outline-info btn-lg
+        " style="position: relative;left: 20%;  font-family: 'Mulish', sans-serif"
+        (click)="onClickSources();">
+        <i class="fas fa-server"></i> Sources</button>
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+</div>
+<br><br><br>
+
+
+    
+
+

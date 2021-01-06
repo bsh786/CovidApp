@@ -1,0 +1,51 @@
+
+
+.mainDetails1{
+
+    position: absolute;
+    left: 200px;
+    top: 200px;
+    height: 50%;
+    width: 30%;
+    float: left;
+}
+
+.card:hover{
+    transform: scale(1.05);
+ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.newRecovered{
+   
+    color: #00e64d;
+    border: 3px solid  #00e64d;
+}
+
+.newDeaths{
+
+    color: #ff3300;
+    border: 3px solid #ff3300;
+}
+
+.newCases{
+    color: #3333ff;
+    border: 3px solid #3333ff;
+}
+
+div.hoverCases:hover{
+    color:  #3333ff ;
+}
+
+div.hoverDeaths:hover{
+    color: #ff3300;
+}
+
+div.hoverRecovered:hover{
+    color: #00e64d;
+}
+
+
+
+
+
+

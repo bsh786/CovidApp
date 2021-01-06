@@ -1,0 +1,61 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+
+<div class="d-flex justify-content-center" 
+*ngIf="!dataLoaded" style="position: relative;
+top: 150px;">
+    <div class="spinner-border" role="status">
+    </div>
+
+  <br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br>
+  </div>
+
+<br>
+<div class="container" *ngIf="dataLoaded">
+  
+    <br>
+  <h4 style="text-align: center; font-family: 'Mulish', sans-serif">COVID-19 HELPLINES INDIA</h4> 
+  <br><br>
+     <div class="helplineBody">
+     <div class="row">  
+     <div class="col-6">
+      <i class="fas fa-phone-square-alt"></i> Phone: {{ phone }}
+      <br>
+      <i class="fas fa-envelope"></i> Email: {{ email }}
+      <br>
+      <i class="fab fa-facebook"></i> 
+      Facebook: <a href="{{ facebook }}"> {{ facebook }} </a>
+     </div>
+     <div class="col-6">
+      <i class="fas fa-mobile"></i> Toll Free: {{ tollFree }}
+      <br>
+      <i class="fab fa-twitter-square"></i> Twitter:
+      <a href="{{twitter}}"> {{ twitter }} </a>
+     </div>
+     </div>
+
+     </div>
+   
+    <br>
+    
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col">Helpline number</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let state of statewise">
+          <td>{{state.loc}}</td>
+          <td>{{state.number}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+</div>
+

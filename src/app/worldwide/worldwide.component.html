@@ -1,0 +1,66 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+
+
+<div class="d-flex justify-content-center" 
+*ngIf="!mapReady" style="position: relative;
+top: 150px;">
+    <div class="spinner-border" role="status">
+    </div>
+
+  <br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br>
+  </div>
+
+
+<div>
+<div class="container">
+<google-chart [data]="geoChart" *ngIf=mapReady (chartHover)="onHover();"></google-chart>
+<br><br><br>
+</div>
+</div>
+
+<div class="container">
+<div class="row">
+    <div class="col-6">
+    <table class="table table-sm table-dark table-hover">
+        <thead>
+          <tr>
+            <th scope="col">State</th>
+            <th scope="col">Confirmed</th>
+            <th scope="col">Active</th>
+            <th scope="col">Recovered</th>
+            <th scope="col">Deaths</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let country of response; let i = index" (mouseover)="createGraph(i);"
+          (mouseout)="deleteGraph();">
+            <th scope="row">{{country.country}}</th>
+            <td>{{country.cases}}</td>
+            <td>{{country.active}}</td>
+            <td>{{country.recovered}}</td>
+            <td>{{country.deaths}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+
+      </div>
+      <div class="col-6">
+        <div *ngIf="dataLoaded" class="sticky">
+  
+            <div class="chart-wrapper">
+              <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"></canvas>
+              </div>
+            </div>
+      </div>
+
+    </div>
+</div>
+
+    
+

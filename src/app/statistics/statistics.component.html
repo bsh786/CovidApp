@@ -1,0 +1,199 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+<br>
+
+
+<div class="d-flex justify-content-center" 
+*ngIf="!finalDataLoaded" style="position: relative;
+top: 150px;">
+    <div class="spinner-border" role="status">
+    </div>
+
+  <br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br>
+  </div>
+
+
+
+
+
+<div *ngIf="finalDataLoaded">
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" 
+          role="tab" aria-controls="home" aria-selected="true"
+           style="font-family: 'Mulish', sans-serif;">
+           Last 150 days India</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+           role="tab" aria-controls="profile" aria-selected="false"
+           style="font-family: 'Mulish', sans-serif;">Last 150 days World</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" 
+          role="tab" aria-controls="contact" aria-selected="false"
+          style="font-family: 'Mulish', sans-serif;">Maximum cases by states</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="country-tab" data-toggle="tab"
+             href="#country" role="tab" aria-controls="country" aria-selected="false"
+             style="font-family: 'Mulish', sans-serif;">Maximum cases by countries</a>
+          </li>
+        
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="lineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                   </div>
+                </div>
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="activeCasesLineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="activeLineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                    </div>
+        
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="deathsLineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="deathLineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="dischargedLineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="recoveredLineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="worldCasesLineChartData"
+                        [labels]="worldChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="lineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                   </div>
+                </div>
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="worldActiveCasesLineChartData"
+                        [labels]="worldChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="activeLineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                    </div>
+            
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="worldDeathsLineChartData"
+                        [labels]="worldChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="deathLineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="chart-wrapper">
+                        <canvas baseChart
+                        [datasets]="worldRecoveredLineChartData"
+                        [labels]="worldChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="recoveredLineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins"></canvas>
+                    </div>
+                </div> 
+            </div>
+            
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+            <div style="height: 30%; width: 80%;">  
+                <div class="chart-wrapper">
+                    <canvas baseChart
+                    [datasets]="statesBarChartData"
+                    [labels]="statesBarChartLabels"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"></canvas>
+                </div>
+                </div>
+
+ 
+        </div>
+        
+ <div class="tab-pane fade" id="country" role="tabpanel" aria-labelledby="country-tab"> 
+     
+     <div style="height: 30%; width: 80%;">  
+        <div class="chart-wrapper">
+            <canvas baseChart
+            [datasets]="countriesBarChartData"
+            [labels]="countriesBarChartLabels"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"></canvas>
+        </div>
+        </div>
+    </div>
+      </div>
+    
+  </div>
+
+</div>
+
+
+
